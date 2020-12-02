@@ -1,0 +1,102 @@
+server:
+  port: 9003
+
+spring:
+  application:
+    name: Demo
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: example_kafka
+
+
+
+#axon:
+#  serializer:
+#    general: jackson
+#  eventhandling:
+#    processors:
+#     "[local.event]":
+#        source: kafkaMessageSource
+#        mode: TRACKING
+#        threadCount: 1
+#        batchSize: 1
+#  kafka:
+#    bootstrap-servers: localhost:9092
+#    clientid: kafka-axon-example
+#    defaulttopic: local.event
+#    consumer:
+#      group-id: local.event.consumer-group
+#    properties:
+#      security.protocol: PLAINTEXT
+#        
+
+#axon:
+#  kafka:
+#    clientid: kafka-axon-example
+#    defaulttopic: local.event
+#    producer:
+#      retries: 0
+#      bootstrapservers: localhost:9092
+#    consumer:
+#      group-id: "local.event.consumer-group"
+#      event-processor-mode: tracking
+#
+#    properties:
+#      security.protocol: PLAINTEXT
+
+
+
+
+kafka:
+  topics: [axon-events]
+  group:
+    id: kafka-group
+    prefix: kafka-group
+  consumer:
+    count: 0
+  buffer:
+    capacity:
+  processor:
+    name: kafka-group
+  bootstrap-servers: localhost:9092
+
+axon:
+  eventhandling:
+    processors:
+      kafka-group:
+        mode: tracking
+        source: kafkaMessageSource  
+  kafka:
+    bootstrap-servers: localhost:9092
+    client-id: kafka-group
+    default-topic: axon-events
+    properties:
+      security.protocol: PLAINTEXT
+
+    #publisher:
+      #confirmation-mode: transactional
+      
+
+    producer:
+      transaction-id-prefix: kafka-sample
+      retries: 1
+      #event-processor-mode: subscribing
+      # For additional unnamed properties, add them to the `properties` map like so
+      properties:
+        some-key: some-value
+
+    fetcher:
+      poll-timeout: 3000 # Defaults to "5000" milliseconds
+
+    consumer:
+      group-id: kafka-group
+      max-poll-records: 10
+      
+      #enable-auto-commit: true
+      #auto-commit-interval: 3000
+      #event-processor-mode: subscribing
+      # For additional unnamed properties, add them to the `properties` map like so
+      properties:
+        some-key: some-value

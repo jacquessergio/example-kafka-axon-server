@@ -6,8 +6,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.axonframework.messaging.responsetypes.MultipleInstancesResponseType;
-import org.axonframework.messaging.responsetypes.ResponseType;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +22,7 @@ import com.example.demo.infrastructure.query.queries.AllClientsQuery;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/client")
 @AllArgsConstructor
 public class ClientResource {
 

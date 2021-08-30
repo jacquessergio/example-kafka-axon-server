@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.domain.event.ClientCreatedEvent;
 import com.example.demo.domain.model.Client;
-import com.example.demo.infrastructure.commons.mappers.ClientModelMapper;
 import com.example.demo.infrastructure.dto.ClientDTO;
+import com.example.demo.infrastructure.exceptions.ClientException;
 import com.example.demo.infrastructure.repository.ClientWriteRepository;
 import com.google.common.collect.Lists;
 
@@ -28,29 +28,34 @@ public class ClientWriteDBProjection {
 	@Autowired
 	private ClientWriteRepository repository;
 
-	@Autowired
-	private ClientModelMapper<ClientDTO, Client> clientModelMapper;
-
 	@EventHandler
-	public void on(ClientCreatedEvent event) {
+	public void on(ClientCreatedEvent event) throws ClientException {
 		log.info("Handling: {} CreatedEvent: {}", event.getClass().getSimpleName(), event);
-
-		log.info("===== gravando base escrita =====");
-
-		final Client client = Client.builder().uuid(event.getId().toString()).name(event.getName()).build();
-
-		repository.save(client);
+		try {
+			log.info("===== Gravando na Base de Dominio ... =====");
+			final Client client =  Client
+					.builder()
+					.uuid(event.getId().toString())
+					.name(event.getName())
+					.build();
+			repository.save(client);
+		} catch (final Exception e) {
+			throw new ClientException("Ocorreu um erro ao tentar salvar o registro!", e);
+		}
+		log.info("===== Gravado com sucesso !!! =====");
 	}
 
 	@QueryHandler
-	public List<ClientDTO> handle(ClientDTO dto) {
-		final List<Client> clientsFound = repository.findAll();
-		if (!clientsFound.isEmpty() && clientsFound != null)
-			return Lists.transform(clientsFound, client -> new ClientDTO(client));
+	public List<ClientDTO> handle(ClientDTO dto) throws ClientException {
+		log.info("Handling: {} ClientDTO: {}", dto.getClass().getSimpleName(), dto);
+		try {
+			log.info("===== Buscando registros na Base de dominio ... =====");
+			final List<Client> clientsFound = repository.findAll();
+			if (!clientsFound.isEmpty() && clientsFound != null)
+				return Lists.transform(clientsFound, client -> new ClientDTO(client));
+		} catch (final Exception e) {
+			throw new ClientException("Ocorreu um erro ao tentar buscar os dados!", e);
+		}
 		return new ArrayList<>();
-	}
-
-	private Client toModel(final ClientDTO clientDto) {
-		return clientModelMapper.convertDtoToModel(clientDto, Client.class);
 	}
 }

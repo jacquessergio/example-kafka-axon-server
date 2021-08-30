@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //@SpringBootApplication(excludeName =  {"org.axonframework.extensions.kafka.autoconfig.KafkaAutoConfiguration"})
 @SpringBootApplication
-public class ExampleKafkaApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ExampleKafkaApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }

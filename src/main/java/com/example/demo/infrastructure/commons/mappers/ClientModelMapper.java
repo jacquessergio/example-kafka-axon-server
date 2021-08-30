@@ -1,4 +1,4 @@
-package com.example.demo.commons.mappers;
+package com.example.demo.infrastructure.commons.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

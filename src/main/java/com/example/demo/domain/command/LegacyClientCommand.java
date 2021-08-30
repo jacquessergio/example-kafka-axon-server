@@ -1,5 +1,6 @@
-package com.example.demo.commons.command;
+package com.example.demo.domain.command;
 
+/*
 import java.util.UUID;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -8,7 +9,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.domain.dto.ClientDTO;
+//import com.example.demo.domain.dto.ClientDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,4 +30,4 @@ public class LegacyClientCommand {
 		commandGateway.send(new ClientCommand(UUID.randomUUID(), command));
 	}
 	
-}
+}*/

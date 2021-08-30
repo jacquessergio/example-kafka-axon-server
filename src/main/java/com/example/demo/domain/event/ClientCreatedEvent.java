@@ -1,10 +1,8 @@
-package com.example.demo.commons.command;
+package com.example.demo.domain.event;
 
 import java.util.UUID;
 
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
-
-import com.example.demo.domain.dto.ClientDTO;
+//import com.example.demo.domain.dto.ClientDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -17,10 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
-public class ClientCommand {
+public class ClientCreatedEvent {
 
-	@TargetAggregateIdentifier
 	private UUID id;
 
-	private ClientDTO client;
+	private String name;
 }

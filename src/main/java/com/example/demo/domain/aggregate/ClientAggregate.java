@@ -8,13 +8,10 @@ import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
-//import org.springframework.kafka.annotation.KafkaListener;
-//import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.commons.command.ClientCommand;
-import com.example.demo.commons.event.ClientCreatedEvent;
-import com.example.demo.domain.dto.ClientDTO;
+import com.example.demo.domain.command.CreateClientCommand;
+import com.example.demo.domain.event.ClientCreatedEvent;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -31,19 +28,19 @@ public class ClientAggregate {
 	@AggregateIdentifier
 	private UUID id;
 
-	private ClientDTO client;
+	private String name;
 
 	@CommandHandler
-	public ClientAggregate(ClientCommand command) {
+	public ClientAggregate(CreateClientCommand command) {
 		log.info("Handling {} command: {}", command.getClass().getSimpleName(), command);
-		apply(new ClientCreatedEvent(command.getId(), command.getClient()));
+		apply(new ClientCreatedEvent(command.getId(), command.getName()));
 	}
 
 	@EventHandler
 	public void on(ClientCreatedEvent event) {
-		log.debug("Handling {} event: {}", event.getClass().getSimpleName(), event);
+		log.info("Handling {} event: {}", event.getClass().getSimpleName(), event);
 		this.id = event.getId();
-		this.client = event.getClient();
+		this.name = event.getName();
 	}
 
 }

@@ -1,7 +1,8 @@
-package com.example.demo.domain.dto;
+package com.example.demo.infrastructure.dto;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
+import com.example.demo.domain.model.Client;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -19,5 +20,13 @@ public class ClientDTO {
 	@TargetAggregateIdentifier
 	private String id;
 
+	private String uuid;
+
 	private String name;
+
+	public ClientDTO(Client client) {
+		this.id = String.valueOf(client.getId());
+		this.uuid = client.getUuid();
+		this.name = client.getName();
+	}
 }

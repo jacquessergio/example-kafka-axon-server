@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.infrastructure.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,8 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
-import com.example.demo.domain.dto.ClientDTO;
+import com.example.demo.infrastructure.dto.ClientDTO;
+
 
 @EnableKafka
 @Configuration
@@ -43,17 +44,17 @@ public class KafkaConsumerConfig {
 		return new DefaultKafkaConsumerFactory<>(props);
 	}
 
+	@Bean("consumerFactoryClientDTO")
+	public ConsumerFactory<String, ClientDTO> consumerFactoryClientDTO() {
+		return new DefaultKafkaConsumerFactory<>(consumerFactory().getConfigurationProperties(),
+				new StringDeserializer(), new JsonDeserializer<>(ClientDTO.class));
+	}
+
 	@Bean
 	public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
 		final ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(consumerFactory());
 		return factory;
-	}
-
-	@Bean("consumerFactoryClientDTO")
-	public ConsumerFactory<String, ClientDTO> consumerFactoryClientDTO() {
-		return new DefaultKafkaConsumerFactory<>(consumerFactory().getConfigurationProperties(),
-				new StringDeserializer(), new JsonDeserializer<>(ClientDTO.class));
 	}
 
 	@Bean("kafkaListenerContainerFactoryClientDTO")

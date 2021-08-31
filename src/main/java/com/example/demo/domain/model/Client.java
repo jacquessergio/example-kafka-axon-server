@@ -1,5 +1,6 @@
 package com.example.demo.domain.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -22,7 +23,9 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @ToString
 @Table(name = "clients")
-public class Client {
+public class Client implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

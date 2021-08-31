@@ -1,5 +1,6 @@
 package com.example.demo.infrastructure.query.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -11,7 +12,6 @@ import com.example.demo.domain.event.ClientCreatedEvent;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
@@ -20,7 +20,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @ToString
-public class Client {
+public class Client implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String id;

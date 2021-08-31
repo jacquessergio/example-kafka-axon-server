@@ -1,5 +1,6 @@
 package com.example.demo.infrastructure.dto;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
@@ -17,7 +18,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ClientDTO {
+public class ClientDTO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@TargetAggregateIdentifier
 	private String id;

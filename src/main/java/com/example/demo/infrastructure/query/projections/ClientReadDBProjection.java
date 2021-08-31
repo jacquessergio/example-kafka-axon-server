@@ -33,17 +33,17 @@ public class ClientReadDBProjection {
 		log.info("Handling: {} CreatedEvent: {}", event.getClass().getSimpleName(), event);
 		try {
 			log.info("===== Gravando na Base de leitura ... =====");
-			final Client client = Client
+			Client client = Client
 					.builder()
 					.uuid(event.getId().toString())
 					.name(event.getName())
 					.createdAt(LocalDate.now().toString())
 					.build();
-			repository.save(client);
+			client = repository.save(client);
+			log.info("===== [DBRead] Client {} gravado com sucesso !!! =====", client);			
 		} catch (final Exception e) {
 			throw new ClientException("Ocorreu um erro ao tentar salvar o registro!", e);
 		}
-		log.info("===== Gravado com sucesso !!! =====");
 	}
 
 	@QueryHandler

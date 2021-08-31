@@ -5,6 +5,8 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
+import javax.ws.rs.core.Response;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
@@ -35,10 +37,13 @@ public class ClientResource {
 	}
 
 	@GetMapping
-	public Future<List<Client>> execute() {
-		return queryGateway.query(new AllClientsQuery(), ResponseTypes.multipleInstancesOf(Client.class));
+	public Response execute() {
+		return queryGateway
+				.query(new AllClientsQuery(), Client.class)
+				.thenApply(result -> Response.ok(result).build())
+				.join();
 	}
-	
+
 	@GetMapping(path = "/domain")
 	public Future<List<ClientDTO>> getAllClientsDomain() {
 		return queryGateway.query(new ClientDTO(), ResponseTypes.multipleInstancesOf(ClientDTO.class));

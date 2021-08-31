@@ -5,7 +5,7 @@ import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 import java.util.UUID;
 
 import org.axonframework.commandhandling.CommandHandler;
-import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 import org.springframework.stereotype.Component;
@@ -36,8 +36,8 @@ public class ClientAggregate {
 		apply(new ClientCreatedEvent(command.getId(), command.getName()));
 	}
 
-	@EventHandler
-	public void on(ClientCreatedEvent event) {
+	@EventSourcingHandler
+	protected void on(ClientCreatedEvent event) {
 		log.info("Handling {} event: {}", event.getClass().getSimpleName(), event);
 		this.id = event.getId();
 		this.name = event.getName();

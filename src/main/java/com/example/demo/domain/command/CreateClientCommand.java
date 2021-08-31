@@ -1,5 +1,6 @@
 package com.example.demo.domain.command;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
@@ -17,7 +18,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
-public class CreateClientCommand {
+public class CreateClientCommand implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@TargetAggregateIdentifier
 	private UUID id;

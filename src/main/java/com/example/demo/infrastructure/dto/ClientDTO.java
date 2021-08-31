@@ -1,7 +1,6 @@
 package com.example.demo.infrastructure.dto;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
@@ -25,7 +24,7 @@ public class ClientDTO implements Serializable {
 	@TargetAggregateIdentifier
 	private String id;
 
-	private UUID uuid;
+	private String uuid;
 
 	private String name;
 

@@ -12,6 +12,7 @@ import com.example.demo.domain.event.ClientCreatedEvent;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
@@ -19,6 +20,7 @@ import lombok.experimental.SuperBuilder;
 @Document
 @SuperBuilder
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class Client implements Serializable {
 

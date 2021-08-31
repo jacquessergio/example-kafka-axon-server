@@ -1,7 +1,6 @@
 package com.example.demo.domain.model;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +32,7 @@ public class Client implements Serializable {
 	private Long id;
 	
 	@Column(name = "uuid", nullable = false)
-	private UUID uuid;
+	private String uuid;
 
 	@Column(name = "name", length = 50, nullable = false)
 	private String name;

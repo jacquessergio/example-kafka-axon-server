@@ -1,10 +1,13 @@
 package com.example.demo.infrastructure.query.model;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.example.demo.domain.event.ClientCreatedEvent;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +18,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 @Document
 @SuperBuilder
-@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class Client {
@@ -32,4 +34,9 @@ public class Client {
 	@Field(name = "createdAt")
 	private String createdAt;
 
+	public Client(final ClientCreatedEvent event) {
+		this.uuid = event.getId();
+		this.name = event.getName();
+		this.createdAt = LocalDate.now().toString();
+	}
 }

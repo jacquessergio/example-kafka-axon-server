@@ -33,13 +33,13 @@ public class ClientWriteDBProjection {
 		log.info("Handling: {} CreatedEvent: {}", event.getClass().getSimpleName(), event);
 		try {
 			log.info("===== Gravando na Base de Dominio ... =====");
-			Client client =  Client
+			final Client client =  Client
 					.builder()
 					.uuid(event.getId())
 					.name(event.getName())
 					.build();
-			client = repository.save(client);
-			log.info("===== [DBWrite] Client {} gravado com sucesso !!! =====", client);
+			final var clientSaved = repository.save(client);
+			log.info("===== [DBWrite] {} gravado com sucesso !!! =====", clientSaved);
 		} catch (final Exception e) {
 			throw new ClientException("Ocorreu um erro ao tentar salvar o registro!", e);
 		}

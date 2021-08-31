@@ -1,6 +1,5 @@
 package com.example.demo.infrastructure.query.projections;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,14 +32,8 @@ public class ClientReadDBProjection {
 		log.info("Handling: {} CreatedEvent: {}", event.getClass().getSimpleName(), event);
 		try {
 			log.info("===== Gravando na Base de leitura ... =====");
-			Client client = Client
-					.builder()
-					.uuid(event.getId())
-					.name(event.getName())
-					.createdAt(LocalDate.now().toString())
-					.build();
-			client = repository.save(client);
-			log.info("===== [DBRead] Client {} gravado com sucesso !!! =====", client);			
+			final var clientSaved = repository.save(new Client(event));
+			log.info("===== [DBRead] {} gravado com sucesso !!! =====", clientSaved);			
 		} catch (final Exception e) {
 			throw new ClientException("Ocorreu um erro ao tentar salvar o registro!", e);
 		}

@@ -1,5 +1,7 @@
 package com.example.demo.domain.model;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +29,7 @@ public class Client {
 	private Long id;
 	
 	@Column(name = "uuid", nullable = false)
-	private String uuid;
+	private UUID uuid;
 
 	@Column(name = "name", length = 50, nullable = false)
 	private String name;

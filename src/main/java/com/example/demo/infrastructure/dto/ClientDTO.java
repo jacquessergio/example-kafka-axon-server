@@ -1,5 +1,7 @@
 package com.example.demo.infrastructure.dto;
 
+import java.util.UUID;
+
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import com.example.demo.domain.model.Client;
@@ -20,7 +22,7 @@ public class ClientDTO {
 	@TargetAggregateIdentifier
 	private String id;
 
-	private String uuid;
+	private UUID uuid;
 
 	private String name;
 

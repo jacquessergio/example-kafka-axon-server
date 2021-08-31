@@ -35,7 +35,7 @@ public class ClientReadDBProjection {
 			log.info("===== Gravando na Base de leitura ... =====");
 			Client client = Client
 					.builder()
-					.uuid(event.getId().toString())
+					.uuid(event.getId())
 					.name(event.getName())
 					.createdAt(LocalDate.now().toString())
 					.build();

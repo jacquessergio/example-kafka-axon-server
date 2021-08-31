@@ -1,5 +1,7 @@
 package com.example.demo.infrastructure.query.model;
 
+import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -22,7 +24,7 @@ public class Client {
 	private String id;
 
 	@Field(name = "uuid")
-	private String uuid;
+	private UUID uuid;
 
 	@Field(name = "name")
 	private String name;

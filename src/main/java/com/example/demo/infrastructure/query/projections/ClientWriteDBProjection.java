@@ -35,7 +35,7 @@ public class ClientWriteDBProjection {
 			log.info("===== Gravando na Base de Dominio ... =====");
 			Client client =  Client
 					.builder()
-					.uuid(event.getId().toString())
+					.uuid(event.getId())
 					.name(event.getName())
 					.build();
 			client = repository.save(client);

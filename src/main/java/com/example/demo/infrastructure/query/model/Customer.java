@@ -8,7 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import com.example.demo.domain.event.ClientCreatedEvent;
+import com.example.demo.domain.event.CustomerCreatedEvent;
+import com.example.demo.domain.event.CustomerUpdatedEvent;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Client implements Serializable {
+public class Customer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -38,7 +39,13 @@ public class Client implements Serializable {
 	@Field(name = "createdAt")
 	private String createdAt;
 
-	public Client(final ClientCreatedEvent event) {
+	public Customer(final CustomerCreatedEvent event) {
+		this.uuid = event.getId();
+		this.name = event.getName();
+		this.createdAt = LocalDate.now().toString();
+	}
+	public Customer(final String id, final CustomerUpdatedEvent event) {
+		this.id = id;
 		this.uuid = event.getId();
 		this.name = event.getName();
 		this.createdAt = LocalDate.now().toString();

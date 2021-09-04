@@ -3,7 +3,7 @@ package com.example.demo.infrastructure.query.queries;
 import java.io.Serializable;
 import java.util.List;
 
-import com.example.demo.infrastructure.query.model.Client;
+import com.example.demo.infrastructure.query.model.Customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,5 +16,5 @@ public class AllClientsQuery implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private List<Client> clients;
+	private List<Customer> clients;
 }

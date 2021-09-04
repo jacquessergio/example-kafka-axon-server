@@ -16,7 +16,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
-import com.example.demo.infrastructure.dto.ClientDTO;
+import com.example.demo.infrastructure.dto.CustomerDTO;
 
 
 @EnableKafka
@@ -45,9 +45,9 @@ public class KafkaConsumerConfig {
 	}
 
 	@Bean("consumerFactoryClientDTO")
-	public ConsumerFactory<String, ClientDTO> consumerFactoryClientDTO() {
+	public ConsumerFactory<String, CustomerDTO> consumerFactoryClientDTO() {
 		return new DefaultKafkaConsumerFactory<>(consumerFactory().getConfigurationProperties(),
-				new StringDeserializer(), new JsonDeserializer<>(ClientDTO.class));
+				new StringDeserializer(), new JsonDeserializer<>(CustomerDTO.class));
 	}
 
 	@Bean
@@ -58,8 +58,8 @@ public class KafkaConsumerConfig {
 	}
 
 	@Bean("kafkaListenerContainerFactoryClientDTO")
-	public ConcurrentKafkaListenerContainerFactory<String, ClientDTO> kafkaListenerContainerFactoryClientDTO() {
-		final ConcurrentKafkaListenerContainerFactory<String, ClientDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
+	public ConcurrentKafkaListenerContainerFactory<String, CustomerDTO> kafkaListenerContainerFactoryClientDTO() {
+		final ConcurrentKafkaListenerContainerFactory<String, CustomerDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(consumerFactoryClientDTO());
 		return factory;
 	}

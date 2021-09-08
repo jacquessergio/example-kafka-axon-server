@@ -44,8 +44,8 @@ services:
       MONGO_INITDB_DATABASE: realestatemanagement
     ports:
       - "27017:27017"
-    volumes:
-      - C:\dev\mongodb\mongo-volume:/data/db
+    #volumes:
+      #- C:\dev\mongodb\mongo-volume:/data/db
     networks:
       - intranet-docker-lab
   ## For windows

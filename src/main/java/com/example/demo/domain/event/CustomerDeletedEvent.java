@@ -19,4 +19,3 @@ public class CustomerDeletedEvent extends AbstractEvent {
 		this.uuid = command.getUuid();
 	}
 }
-

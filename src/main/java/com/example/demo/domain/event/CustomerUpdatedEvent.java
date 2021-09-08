@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 public class CustomerUpdatedEvent extends AbstractEvent {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String uuid;
 	private String name;
 

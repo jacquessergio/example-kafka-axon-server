@@ -15,12 +15,12 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 @EqualsAndHashCode
 public abstract class AbstractEvent implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@TargetAggregateIdentifier
 	private UUID id;
-		
+
 	private CustomerStatus status;
 
 }

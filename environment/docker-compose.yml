@@ -48,24 +48,34 @@ services:
       - C:\dev\mongodb\mongo-volume:/data/db
     networks:
       - intranet-docker-lab
+  ## For windows
+  #axonserver:
+   # image: axoniq/axonserver
+   # hostname: axonserver
+   # volumes:
+    #  - type: bind
+    #    source: ./data
+    #    target: /data
+    #  - type: bind
+    #    source: ./events
+    #    target: /eventdata
+    #  - type: bind
+    #    source: ./config
+    #    target: /config
+    #    read_only: true
+    #ports:
+    #  - '8024:8024'
+    #  - '8124:8124'
+    #  - '8224:8224'
+    #networks:
+    #  - intranet-docker-lab
   axonserver:
     image: axoniq/axonserver
     hostname: axonserver
-    volumes:
-      - type: bind
-        source: ./data
-        target: /data
-      - type: bind
-        source: ./events
-        target: /eventdata
-      - type: bind
-        source: ./config
-        target: /config
-        read_only: true
     ports:
-      - '8024:8024'
-      - '8124:8124'
-      - '8224:8224'
+      - "8024:8024"
+      - "8124:8124"
+      - "8224:8224"
     networks:
       - intranet-docker-lab
 networks: 
